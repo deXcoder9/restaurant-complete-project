@@ -2,13 +2,13 @@ import PropTypes from "prop-types";
 import { Parallax } from "react-parallax";
 
 import "./cover.css";
-import bgImg from "../../../../assets/home/chef-service.jpg"
 
-const Cover = ({ header, description }) => {
+
+const Cover = ({ header, description, bgImage }) => {
   return (
     <Parallax
       blur={{ min: -50, max: 50 }}
-      bgImage={bgImg}
+      bgImage={bgImage}
       bgImageAlt="menu"
       strength={-300}
     >

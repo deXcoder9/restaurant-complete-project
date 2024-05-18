@@ -1,4 +1,4 @@
-import React from "react";
+import PropTypes from 'prop-types';
 
 const MenuItem = ({ item }) => {
   const { name, image, price, recipe } = item;
@@ -18,5 +18,9 @@ const MenuItem = ({ item }) => {
     </div>
   );
 };
+
+MenuItem.propTypes  = {
+  item: PropTypes.object,
+}
 
 export default MenuItem;

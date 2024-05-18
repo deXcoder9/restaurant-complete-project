@@ -1,13 +1,31 @@
 import { Helmet } from "react-helmet-async"
-import SubBanner from "../../shared/sub banner/SubBanner"
-
-import PopularMenu from "../../home/popular menu/PopularMenu"
 
 import menuImage from "../../../../assets/menu/banner3.jpg"
-import Cover from "../../shared/cover/Cover"
 
+import dessertImg from "../../../../assets/menu/dessert-bg.jpeg"
+import pizzaImg from "../../../../assets/menu/pizza-bg.jpg"
+import saladImg from "../../../../assets/menu/salad-bg.jpg"
+import soupImg from "../../../../assets/menu/soup-bg.jpg"
+
+
+import SubBanner from "../../shared/sub banner/SubBanner"
+import SectionTitle from "../../../section title/SectionTitle"
+import MenuCategory from "../menu category/MenuCategory"
+
+import useMenu from "../../../../hooks/useMenu"
 
 const Menu = () => {
+
+  const [menu] = useMenu()
+
+  const pizza = menu.filter(item => item.category === 'pizza')
+  const soup = menu.filter(item => item.category === 'soup')
+  const salad = menu.filter(item => item.category === 'salad')
+  const offered = menu.filter(item => item.category === 'offered')
+  const dessert = menu.filter(item => item.category === 'dessert')
+  // console.log(offered)
+
+
   return (
     <div>
         <Helmet>
@@ -20,25 +38,38 @@ const Menu = () => {
         header={"our menu"}
         description={"Would you like to try a dish?"}
         ></SubBanner>
-        <PopularMenu></PopularMenu>
+        <SectionTitle
+        heading={"today's offer"}
+        subHeadeing={"don't miss"}
+        ></SectionTitle>
 
-        <Cover
+        <MenuCategory 
+        items={offered}
+         ></MenuCategory>
+
+        <MenuCategory 
+        bgImage={dessertImg}
+        items={dessert} 
         header={"desserts"}
-        description={"lorem ipsum dolor sit amet, consectet lorem ipsum dolor sit lorem ipsum dolor sit amet, consectet lorem ipsum dolor sitlorem ipsum dolor sit amet, consectet lorem ipsum dolor sit"}
-        ></Cover>
-        <PopularMenu></PopularMenu>
+        description={"lorem ipsum dolor sit amet, consectet lorem ipsum dolor sit lorem ipsum dolor sit amet, consectet lorem ipsum dolor sitlorem ipsum dolor sit amet, consectet lorem ipsum dolor sit"} ></MenuCategory>
 
-        <Cover
+        <MenuCategory 
+        bgImage={pizzaImg}
+        items={pizza}
         header={"pizza"}
-        description={"lorem ipsum dolor sit amet, consectet lorem ipsum dolor sit lorem ipsum dolor sit amet, consectet lorem ipsum dolor sitlorem ipsum dolor sit amet, consectet lorem ipsum dolor sit"}
-        ></Cover>
-        <PopularMenu></PopularMenu>
+        description={"lorem ipsum dolor sit amet, consectet lorem ipsum dolor sit lorem ipsum dolor sit amet, consectet lorem ipsum dolor sitlorem ipsum dolor sit amet, consectet lorem ipsum dolor sit"}  ></MenuCategory>
 
-        <Cover
+        <MenuCategory items={salad}
+        bgImage={saladImg}
         header={"salads"}
-        description={"lorem ipsum dolor sit amet, consectet lorem ipsum dolor sit lorem ipsum dolor sit amet, consectet lorem ipsum dolor sitlorem ipsum dolor sit amet, consectet lorem ipsum dolor sit"}
-        ></Cover>
-        <PopularMenu></PopularMenu>
+        description={"lorem ipsum dolor sit amet, consectet lorem ipsum dolor sit lorem ipsum dolor sit amet, consectet lorem ipsum dolor sitlorem ipsum dolor sit amet, consectet lorem ipsum dolor sit"} ></MenuCategory>
+
+        <MenuCategory 
+        bgImage={soupImg}
+        items={soup}
+        header={"Soups"}
+        description={"lorem ipsum dolor sit amet, consectet lorem ipsum dolor sit lorem ipsum dolor sit amet, consectet lorem ipsum dolor sitlorem ipsum dolor sit amet, consectet lorem ipsum dolor sit"} ></MenuCategory>
+
     </div>
   )
 }
