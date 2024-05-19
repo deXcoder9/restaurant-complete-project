@@ -25,7 +25,7 @@ const Cover = ({ header, description, bgImage }) => {
 };
 
 Cover.propTypes = {
-  bgImage: PropTypes.element,
+  bgImage: PropTypes.node,
   header: PropTypes.string,
   description: PropTypes.string,
 };

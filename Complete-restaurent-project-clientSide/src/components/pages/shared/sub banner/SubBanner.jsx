@@ -15,7 +15,7 @@ const SubBanner = ({ bgImage, header, description }) => {
 };
 
 SubBanner.propTypes  = {
-    bgImage: PropTypes.element,
+    bgImage: PropTypes.node,
     header: PropTypes.string,
     description: PropTypes.string
 }

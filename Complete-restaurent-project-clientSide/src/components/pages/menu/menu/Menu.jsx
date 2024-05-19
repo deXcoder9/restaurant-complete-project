@@ -67,7 +67,7 @@ const Menu = () => {
         <MenuCategory 
         bgImage={soupImg}
         items={soup}
-        header={"Soups"}
+        header={"soups"}
         description={"lorem ipsum dolor sit amet, consectet lorem ipsum dolor sit lorem ipsum dolor sit amet, consectet lorem ipsum dolor sitlorem ipsum dolor sit amet, consectet lorem ipsum dolor sit"} ></MenuCategory>
 
     </div>

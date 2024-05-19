@@ -1,0 +1,28 @@
+.tabPanel{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);   
+    place-items: center;
+}
+
+.react-tabs__tab{
+    background-color: transparent;
+    color: white;
+    font-size: 15px;
+}
+.react-tabs__tab[aria-selected="true"] {
+    color: #BB8506;
+    border-bottom: 2px solid #BB8506; /* Example style */
+    border-top: none;
+    border-left: none;
+    border-right: none;
+}
+
+.react-tabs__tab-list{
+    border: none;
+    text-align: center;
+    margin-bottom: 30px ;
+
+}
+.react-tabs__tab-list *{
+    margin: 0 20px;
+}

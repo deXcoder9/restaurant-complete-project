@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.tabPanelImage{
+    border-radius: 10px 10px 0px 0px;
+}
