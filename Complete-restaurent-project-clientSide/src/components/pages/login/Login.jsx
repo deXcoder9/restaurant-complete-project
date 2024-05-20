@@ -1,7 +1,12 @@
-import { useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { loadCaptchaEnginge, LoadCanvasTemplate,  validateCaptcha } from 'react-simple-captcha';
+import { AuthContext } from '../../../providers/AuthProvider';
+import { Link } from 'react-router-dom';
 
 const Login = () => {
+
+  const {signIn} = useContext(AuthContext);
+
     const [disabled, setDisabled ] = useState(true)
 
     const captchaRef = useRef(null)
@@ -14,25 +19,11 @@ const handleLogin = event => {
     const email = event.target.email.value;
     const password = event.target.password.value;
     console.log(email, password);
-    // const url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${process.env.REACT_APP_FIREBASE_API_KEY}`;
-    // fetch(url, {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify({
-    //     email,
-    //     password,
-    //     returnSecureToken: true,
-    //   }),
-    // })
-    //  .then((res) => res.json())
-    //  .then((data) => {
-    //     console.log(data);
-    //   })
-    //  .catch((error) => {
-    //     console.log(error);
-    //   });
+    
+    signIn(email, password)
+    .then(userCredentials => {
+      console.log(userCredentials.user)
+    })
 }
 
 const handleCapchaValidate = () =>{
@@ -74,6 +65,7 @@ const handleCapchaValidate = () =>{
           </label>
           <button   onClick={handleCapchaValidate} className="btn btn-xs btn-outline">Validate</button>
         </div>
+        <p>create a new account <Link to="/signup" className='text-blue-500 underline'>here</Link> </p>
         <div className="form-control mt-6">
           <input disabled={disabled} type="submit" className="btn btn-primary" value="submit" />
         </div>
