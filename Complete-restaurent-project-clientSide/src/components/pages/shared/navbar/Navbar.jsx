@@ -1,6 +1,21 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../../../providers/AuthProvider";
+import { BsCart4 } from "react-icons/bs";
+import useCarts from "../../../../hooks/useCarts";
 
 const Navbar = () => {
+
+  const [cart] = useCarts()
+
+  console.log(cart)
+    const {userInfo,logOut}  = useContext(AuthContext)
+
+    const handleLogout = () => {
+      logOut()
+      .then(() => {})
+      .catch(error => console.log(error.message))
+    }
 
     const navOptions = 
     <>
@@ -10,7 +25,20 @@ const Navbar = () => {
     <li><Link> dashboard </Link> </li>
     <li><Link to="/menu"> our menu </Link> </li>
     <li><Link to="/order/desserts" > our shop </Link> </li>
-    <li><Link to="/login"> login </Link> </li>
+    <li className="border-[1px] border-gray-500"> 
+    <Link to="/dashboard/cart">
+    <BsCart4 className="text-xl" />
+      <div className="bg-[#f28d3a] rounded-md px-2" >+{cart.length}</div>
+    </Link> </li>
+    {
+      userInfo?.email ?
+      <> 
+      <span className="pt-2 mx-2 border-[1px] border-blue-500  px-3" > {userInfo.displayName} </span>
+      <button onClick={handleLogout} className="btn btn-outline mt-1 btn-sm">logout!</button>
+      </>
+      :
+      <li><Link to="/login"> login </Link> </li>
+    }
     </>
 
   return (

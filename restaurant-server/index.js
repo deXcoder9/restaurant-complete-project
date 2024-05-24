@@ -1,4 +1,4 @@
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 const express = require("express");
 const cors = require("cors");
 require('dotenv').config()
@@ -24,6 +24,7 @@ const client = new MongoClient(uri, {
 
       const menuCollection = client.db("bistroBoss").collection("menu")
       const reviewCollection = client.db("bistroBoss").collection("reviews")
+      const cartCollection = client.db("bistroBoss").collection("carts")
 
       // getting data menu collection for the server
       app.get('/menu', async (req, res) => {
@@ -37,7 +38,27 @@ const client = new MongoClient(uri, {
         res.send(result);
       })
 
+      // carts collection
+      app.get("/carts", async (req, res) => {
+        const email = req.query.email
+        const query = {email: email}
+        const result = await cartCollection.find(query).toArray();
+        res.send(result);
+      })
 
+      app.post('/carts', async(req, res) =>{
+        const cartItem = req.body
+        const result = await cartCollection.insertOne(cartItem)
+        res.send(result);
+      } )
+
+      app.delete('/carts/:id', async(req, res) =>{
+        const id = req.params.id;
+        const query = {_id: new ObjectId(id)}
+        const result = await cartCollection.deleteOne(query)
+        res.send(result)
+
+      })
 
 
 
