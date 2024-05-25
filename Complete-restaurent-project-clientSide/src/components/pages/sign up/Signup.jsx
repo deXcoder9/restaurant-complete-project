@@ -4,9 +4,12 @@ import { Helmet } from "react-helmet-async";
 import { useContext } from "react";
 import { AuthContext } from "../../../providers/AuthProvider";
 import Swal from 'sweetalert2'
+import useAxiosPublic from "../../../hooks/useAxiosPublic";
+import SocialLogin from "../login/social login/SocialLogin";
 
 const Signup = () => {
 
+  const axiosPublic = useAxiosPublic()
   const {createUser,updateUserProfile } = useContext(AuthContext) 
 
 
@@ -25,7 +28,17 @@ const Signup = () => {
 
       updateUserProfile(data.name, data.photourl)
       .then(()=>{
-        console.log("userProfile updated successfully")
+        const userInfo = {
+          name: data.name,
+          email: data.email
+        }
+        axiosPublic.post("/users", userInfo)
+        .then(res =>{
+          if(res.data.insertedId)
+            console.log("user added to the dataBase successfully")
+          })
+        
+
       }).catch(error => console.log(error.message))
       Swal.fire({
         title: "user created successfully",
@@ -55,7 +68,7 @@ const Signup = () => {
   // }
 
   return (
-    <div>
+    <div className="grid place-items-center pt-16">
     <Helmet>
       <title>Sign up | Bistro Boss</title>
     </Helmet>
@@ -147,6 +160,7 @@ const Signup = () => {
             <input type="submit" className="btn btn-primary" value="Sign Up" />
           </div>
         </form>
+        <SocialLogin></SocialLogin>
         <button className="btn"> <Link to="/">Go Home</Link> </button>
       </div>
     </div>

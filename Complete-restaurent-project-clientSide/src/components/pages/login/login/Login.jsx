@@ -1,9 +1,10 @@
 import { useContext, useEffect,  useState } from 'react';
 import { loadCaptchaEnginge, LoadCanvasTemplate,  validateCaptcha } from 'react-simple-captcha';
-import { AuthContext } from '../../../providers/AuthProvider';
+import { AuthContext } from '../../../../providers/AuthProvider';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import Swal from 'sweetalert2'
+import SocialLogin from '../social login/SocialLogin';
 
 const Login = () => {
 
@@ -65,7 +66,7 @@ const handleCapchaValidate = (e) =>{
 }
 
   return (
-    <div>
+    <div className='grid place-items-center pt-16'>
       <Helmet>
         <title>Login | Bistro Boss</title>
       </Helmet>
@@ -94,11 +95,12 @@ const handleCapchaValidate = (e) =>{
           </label>
          
         </div>
-        <p>create a new account <Link to="/signup" className='text-blue-500 underline'>here</Link> </p>
+        <p>   a new account <Link to="/signup" className='text-blue-500 underline'>here</Link> </p>
         <div className="form-control mt-6">
           <input disabled={disabled} type="submit" className="btn btn-primary" value="submit" />
         </div>
       </form>
+          <SocialLogin></SocialLogin>
           <button className="btn"> <Link to="/">Go Home</Link> </button>
     </div>
     </div>

@@ -2,7 +2,7 @@ import { MdDeleteForever } from "react-icons/md";
 import useCarts from "../../../../hooks/useCarts";
 import SectionTitle from "../../../section title/SectionTitle";
 import Swal from "sweetalert2";
-import useAxios from "../../../../hooks/useAxios";
+import useAxios from "../../../../hooks/useAxiosSecure";
 
 const Cart = () => {
     const [cart, refetch ] = useCarts()

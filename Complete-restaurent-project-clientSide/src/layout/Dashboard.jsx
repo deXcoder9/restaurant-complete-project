@@ -44,6 +44,8 @@ const Dashboard = () => {
             <NavLink to="/dashboard/booking">My booking</NavLink>
           </li>
         </ul>
+
+        {/* shared nav links */}
         <div className="divider divider-neutral w-5/6 my-9 "></div>
         <ul className="space-y-3">
           <li className="space-x-2 text-black uppercase">

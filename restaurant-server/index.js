@@ -25,6 +25,19 @@ const client = new MongoClient(uri, {
       const menuCollection = client.db("bistroBoss").collection("menu")
       const reviewCollection = client.db("bistroBoss").collection("reviews")
       const cartCollection = client.db("bistroBoss").collection("carts")
+      const userCollection = client.db("bistroBoss").collection("users")
+
+      // users realated api
+      app.post('/users', async(req, res) =>{
+        const user = req.body
+        const query = {email: user.email}
+        const existingUser = await userCollection.findOne(query)
+        if(existingUser){
+          return res.send({message: "user already exists", insertedId: null})
+        }
+        const result = await userCollection.insertOne(user)
+        res.send(result);
+      } )
 
       // getting data menu collection for the server
       app.get('/menu', async (req, res) => {
