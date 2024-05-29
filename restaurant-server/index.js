@@ -39,6 +39,12 @@ const client = new MongoClient(uri, {
         res.send(result);
       } )
 
+      app.get('/users', async(req, res) =>{
+        const result = await userCollection.find().toArray()
+        res.send(result);
+      })
+
+
       // getting data menu collection for the server
       app.get('/menu', async (req, res) => {
         const result = await menuCollection.find().toArray()

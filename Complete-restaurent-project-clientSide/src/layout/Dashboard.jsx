@@ -4,13 +4,17 @@ import { BiHomeAlt2 } from "react-icons/bi";
 import { FaCalendarAlt } from "react-icons/fa";
 import { MdMenuBook, MdPayment } from "react-icons/md";
 import { GoCodeReview } from "react-icons/go";
-import { BsFillJournalBookmarkFill } from "react-icons/bs";
+import { BsCardChecklist, BsFillJournalBookmarkFill } from "react-icons/bs";
 import { CiShop } from "react-icons/ci";
 import { GrContactInfo } from "react-icons/gr";
 import useCarts from "../hooks/useCarts";
+import useAuth from "../hooks/useAuth";
+import { LuUtensils } from "react-icons/lu";
 
 const Dashboard = () => {
+  // const {userInfo} = useAuth()
     const [cart ] = useCarts()
+    const isAdmin = "admin"
   return (
     <div className="flex">
       <div className="w-64 min-h-screen bg-[#D1A054] pl-5 ">
@@ -19,7 +23,34 @@ const Dashboard = () => {
           restaurant
         </h4>
         <ul className="space-y-3 mt-16">
+
+    {
+      isAdmin ? 
+      <>
+       <li className="space-x-2 text-black uppercase">
+            <BiHomeAlt2 className="inline-block text-xl    " />
+            <NavLink to="/dashboard/adminHome">Admin Home</NavLink>
+          </li>
           <li className="space-x-2 text-black uppercase">
+            <LuUtensils  className="inline-block text-xl    " />
+            <NavLink to="/dashboard/addItems">Add Items</NavLink>
+          </li>
+          <li className="space-x-2 text-black uppercase">
+            <BsCardChecklist  pleFill className="inline-block text-xl    " />
+            <NavLink to="/dashboard/manageItems">Manage Items</NavLink>
+          </li>
+          <li className="space-x-2 text-black uppercase">
+            <PiShoppingCartSimpleFill className="inline-block text-xl    " />
+            <NavLink to="/dashboard/manageBookings">Manage Bookings </NavLink>
+          </li>
+          <li className="space-x-2 text-black uppercase">
+            <GoCodeReview className="inline-block text-xl    " />
+            <NavLink to="/dashboard/allusers">All Users</NavLink>
+          </li>
+      </>
+      :
+      <>
+       <li className="space-x-2 text-black uppercase">
             <BiHomeAlt2 className="inline-block text-xl    " />
             <NavLink to="/dashboard/userhome">User Home</NavLink>
           </li>
@@ -43,6 +74,10 @@ const Dashboard = () => {
             <BsFillJournalBookmarkFill className="inline-block text-xl    " />
             <NavLink to="/dashboard/booking">My booking</NavLink>
           </li>
+          </>
+    }
+
+         
         </ul>
 
         {/* shared nav links */}
