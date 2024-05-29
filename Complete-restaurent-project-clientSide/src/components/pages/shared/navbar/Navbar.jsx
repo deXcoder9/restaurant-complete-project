@@ -68,7 +68,7 @@ const Navbar = () => {
             {navOptions}
           </ul>
         </div>
-        <a className="btn btn-ghost text-xl">daisyUI</a>
+        <a className="btn btn-ghost text-xl"><span>FreshFeast.</span><span className="-ml-2 text-[#d1a054] ">hub</span> </a>
       </div>
       <div className="navbar-end hidden lg:flex">
         <ul className="menu menu-horizontal px-1 uppercase">
