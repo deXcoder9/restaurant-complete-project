@@ -11,6 +11,7 @@ const Allusers = () => {
     },
   });
 
+  // console.log(users)
   return (
     <div>
       <div className="flex justify-evenly my-10">
@@ -18,25 +19,32 @@ const Allusers = () => {
         <h1 className="text-3xl">Total users: {users.length} </h1>
       </div>
       {/* Table  */}
-      <div className="overflow-x-auto">
-        <table className="table">
+      <div className="overflow-x-auto max-w-[1100px] mx-auto mt-24 " >
+        <table className="table  ">
           {/* head */}
-          <thead>
-            <tr>
+          <thead className="bg-[#d1a054]  ">
+            <tr className="uppercase">
               <th></th>
               <th>Name</th>
               <th>Email</th>
-              <th>Favorite Color</th>
+              <th>Role</th>
+              <th>action</th>
             </tr>
           </thead>
           <tbody>
             {/* row 1 */}
-            <tr>
-              <th>1</th>
-              <td>Cy Ganderton</td>
-              <td>Quality Control Specialist</td>
+            {
+              users.map((user, idx) => <>
+              <tr key={user._id}>
+              <th>{idx +1}</th>
+              <td>{user.name}</td>
+              <td>{user.email}</td>
+              <td>Blue</td>
               <td>Blue</td>
             </tr>
+              </> )
+            }
+            
           </tbody>
         </table>
       </div>
