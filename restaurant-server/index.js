@@ -1,6 +1,7 @@
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 const express = require("express");
 const cors = require("cors");
+const jwt = require('jsonwebtoken');
 require('dotenv').config()
 const app = express();
 const port = process.env.PORT || 5000;
@@ -17,6 +18,18 @@ const client = new MongoClient(uri, {
       deprecationErrors: true,
     }
   });
+
+// middlewares
+  const verifyToken = (req, res, next) => {
+    // console.log("inside verify token ",req.headers)
+    if(!req.headers.authorization ){
+      return res.status(401).send({message: 'forbidden access '});
+    }
+    next()
+  }
+
+
+
   async function run() {
     try {
       // Connect the client to the server	(optional starting in v4.7)
@@ -27,9 +40,16 @@ const client = new MongoClient(uri, {
       const cartCollection = client.db("bistroBoss").collection("carts")
       const userCollection = client.db("bistroBoss").collection("users")
 
+      // JWT related api
+      app.post('/jwt', async(req, res) => {
+        const user = req.body;
+        const token = jwt.sign( user, process.env.ACCESS_TOKEN_SECRET, {expiresIn: '1h'} )
+        res.send({token});
+      })
+
       // users realated api
       app.post('/users', async(req, res) =>{
-        const user = req.body
+        const user = req.body;
         const query = {email: user.email}
         const existingUser = await userCollection.findOne(query)
         if(existingUser){
@@ -39,7 +59,8 @@ const client = new MongoClient(uri, {
         res.send(result);
       } )
 
-      app.get('/users', async(req, res) =>{
+      app.get('/users', verifyToken,  async(req, res) =>{
+        console.log(req.headers)
         const result = await userCollection.find().toArray()
         res.send(result);
       })
@@ -53,7 +74,7 @@ const client = new MongoClient(uri, {
           }
         }
         const result = await userCollection.updateOne(filter, updatedDoc);
-        res.send(result) ; 
+        res.send(result) ;  
 
       })
 
