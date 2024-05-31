@@ -9,11 +9,12 @@ import { CiShop } from "react-icons/ci";
 import { GrContactInfo } from "react-icons/gr";
 import useCarts from "../hooks/useCarts";
 import { LuUtensils } from "react-icons/lu";
+import useAdmin from "../hooks/useAdmin";
 
 const Dashboard = () => {
   // const {userInfo} = useAuth()
     const [cart ] = useCarts()
-    const isAdmin = "admin"
+    const [isAdmin] = useAdmin()
   return (
     <div className="flex">
       <div className="w-64 min-h-screen bg-[#D1A054] pl-5 ">
