@@ -8,7 +8,6 @@ import { BsCardChecklist, BsFillJournalBookmarkFill } from "react-icons/bs";
 import { CiShop } from "react-icons/ci";
 import { GrContactInfo } from "react-icons/gr";
 import useCarts from "../hooks/useCarts";
-import useAuth from "../hooks/useAuth";
 import { LuUtensils } from "react-icons/lu";
 
 const Dashboard = () => {
@@ -36,7 +35,7 @@ const Dashboard = () => {
             <NavLink to="/dashboard/addItems">Add Items</NavLink>
           </li>
           <li className="space-x-2 text-black uppercase">
-            <BsCardChecklist  pleFill className="inline-block text-xl    " />
+            <BsCardChecklist   className="inline-block text-xl    " />
             <NavLink to="/dashboard/manageItems">Manage Items</NavLink>
           </li>
           <li className="space-x-2 text-black uppercase">
